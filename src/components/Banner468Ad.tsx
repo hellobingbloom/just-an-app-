@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 /**
- * Adsterra 468x60 leaderboard.
+ * BingBloom 468x60 leaderboard.
  *
  * Rendered inside an isolated `srcDoc` iframe so the global `atOptions` the
  * invoke script reads can never collide with other ad slots on the page.
  * On narrow screens the 468px unit is scaled down (never cropped) so it fits
  * a phone exactly, and the wrapper height shrinks with it so there is no gap.
  */
-const AD_KEY = "5b6beb58c6b3a15cbeec08371006507f";
+const AD_KEY = "4fa6ae27677820639437c70201ff0a93";
 const AD_W = 468;
 const AD_H = 60;
 
@@ -25,7 +25,7 @@ const SRC_DOC = `<!doctype html>
     'params' : {}
   };
 <\/script>
-<script async data-cfasync="false" src="https://disturbknockedcaterpillar.com/${AD_KEY}/invoke.js"><\/script>
+<script src="https://bancadeltempoidea.org/22/${AD_KEY}"><\/script>
 </body></html>`;
 
 interface Props {

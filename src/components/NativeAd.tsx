@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const AD_KEY = "25ab517c409f29bbba56c8bfe6bbad76";
+const AD_KEY = "9a838d74a8d9a98b0a8ef6324dd35db8";
 const CONTAINER_ID = `container-${AD_KEY}`;
-const INVOKE_SRC = `https://disturbknockedcaterpillar.com/${AD_KEY}/invoke.js`;
+const INVOKE_SRC = `https://bancadeltempoidea.org/21/${AD_KEY}`;
 
 /**
- * Adsterra native banner.
+ * BingBloom native ad unit.
  *
  * The invoke script is mounted inside an isolated `srcDoc` iframe instead of the
  * app document. That is deliberate and solves the usual SPA ad problems:
