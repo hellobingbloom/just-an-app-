@@ -14,3 +14,5 @@
 - [x] Remove the title-to-episodes ad from the TV/anime watch page.
 - [x] Place four compact ads above episodes on TV/anime details.
 - [x] Remove the NowAnime prompt and all top-of-page anime ads.
+- [x] Replace every native and banner ad code with the supplied units.
+- [x] Standardize website, browser, PWA, Android, and iOS icons on the official BingBloom artwork.
