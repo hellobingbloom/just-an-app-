@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { Radio, Tv } from "lucide-react";
 import { TVAPP_CHANNELS } from "@/lib/iptv";
-import bingLogoAsset from "@/assets/bingbloom-official-icon.png.asset.json";
-
-const bingLogo = bingLogoAsset.url;
+const bingLogo = "/logo-compact.png";
 
 // Official channel logos so the row renders instantly without needing a playlist fetch.
 const CHANNEL_LOGOS: Record<string, string> = {

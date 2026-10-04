@@ -371,7 +371,6 @@ const videoXml = [
       `      <video:player_loc allow_embed="yes" autoplay="autoplay=1">${escape(v.player)}</video:player_loc>`,
       `      <video:family_friendly>yes</video:family_friendly>`,
       `      <video:live>no</video:live>`,
-      `      <video:publication_date>${TODAY}T00:00:00+00:00</video:publication_date>`,
       `      <video:requires_subscription>no</video:requires_subscription>`,
       `    </video:video>`,
       `  </url>`,
