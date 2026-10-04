@@ -53,7 +53,7 @@ const MovieWatchPage = () => {
         description={data?.overview?.slice(0, 160) || "Stream movies in HD on BingBloom."}
         type="video.movie"
       />
-      <div className="flex-1 max-w-[1180px] mx-auto w-full">
+      <div className="flex-1 max-w-[1480px] mx-auto w-full">
         <header className="sticky top-0 z-30 flex items-center gap-3 px-3 h-11 bg-[#0A0A0A]/95 backdrop-blur border-b border-white/5">
           <Link to={tmdbId ? `/movie/${tmdbId}` : "/home"} className="p-1.5 -ml-1 rounded-full hover:bg-white/10">
             <ArrowLeft className="w-4 h-4 text-white" />
