@@ -5,6 +5,7 @@ import MoviePlayer, { ServerId } from "@/components/MoviePlayer";
 import SEO from "@/components/SEO";
 import InlineAdRow from "@/components/InlineAdRow";
 import Banner468Ad from "@/components/Banner468Ad";
+import { PlayerAdRail } from "@/components/PlayerRectangleAds";
 
 import TmdbRow from "@/components/TmdbRow";
 import Footer from "@/components/Footer";
@@ -62,12 +63,13 @@ const TvWatchPage = () => {
           </h1>
         </header>
 
-        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6 lg:px-4 lg:pt-3">
+        <div className="lg:grid lg:grid-cols-[190px_minmax(0,1fr)_300px] lg:gap-5 xl:gap-6 lg:px-4 lg:pt-5">
+          <PlayerAdRail />
           <div className="min-w-0">
             <div className="px-3 pt-2 pb-1.5">
               <Banner468Ad label={false} />
             </div>
-            <div className="w-full md:max-w-2xl md:mx-auto lg:max-w-[820px] lg:mx-0">
+            <div className="w-full md:max-w-2xl md:mx-auto lg:max-w-none lg:mx-0">
               {(() => {
                 const eps = seasonQuery.data?.episodes || [];
                 const nextEp = eps.find((e: any) => e.episode_number === episodeNum + 1);
@@ -189,7 +191,7 @@ const TvWatchPage = () => {
           </div>
 
           {/* Desktop sidebar — episode list (YouTube-style) */}
-          <aside className="hidden lg:block w-[320px] shrink-0 pt-1">
+          <aside className="hidden lg:block min-w-0 pt-1">
             <div className="sticky top-14 space-y-4 max-h-[calc(100vh-4rem)] overflow-y-auto pr-1">
               {seasons.length > 0 && (
                 <div>

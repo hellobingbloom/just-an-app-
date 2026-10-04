@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { toggleMyList, isInMyList } from "@/hooks/useMyList";
 import DownloadSourceSheet from "@/components/DownloadSourceSheet";
-import InlineAdRow from "@/components/InlineAdRow";
+import { PlayerAdRow } from "@/components/PlayerRectangleAds";
 import { trackMediaView } from "@/lib/analytics";
 
 const SERVER_PREF_KEY = "bb:player:server";
@@ -325,9 +325,7 @@ const MoviePlayer = ({
         </div>
       </div>
 
-      <div className="border-t border-border/60">
-        <InlineAdRow count={4} />
-      </div>
+      <PlayerAdRow />
 
       <DownloadSourceSheet
         open={downloadOpen}

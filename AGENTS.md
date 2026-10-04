@@ -10,4 +10,5 @@
 <!-- LOVABLE:END -->
 
 - Keep all native placements routed through `NativeAd` and all display banners routed through `Banner468Ad`, so provider code changes remain consistent across the app.
+- Keep the player-only 300x250 placements routed through `PlayerRectangleAds`; they use a distinct provider unit from shared native and banner placements.
 - Derive every BingBloom browser, PWA, Android, and iOS icon from the same official square artwork so brand marks never drift between platforms.

@@ -16,3 +16,5 @@
 - [x] Remove the NowAnime prompt and all top-of-page anime ads.
 - [x] Replace every native and banner ad code with the supplied units.
 - [x] Standardize website, browser, PWA, Android, and iOS icons on the official BingBloom artwork.
+- [x] Match the desktop watch page to the supplied three-column player layout.
+- [x] Use the supplied 300x250 unit for the four player-page ads while retaining the top banner.
