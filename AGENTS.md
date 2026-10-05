@@ -13,3 +13,4 @@
 - Derive every BingBloom browser, PWA, Android, and iOS icon from the same official square artwork so brand marks never drift between platforms.
 - Use shared desktop watch-ad and recommendation components on movie and TV watch pages; this keeps their reference layout and ad ordering consistent.
 - Support leaderboard and rectangle formats through Banner468Ad; isolated frames prevent display-unit configuration collisions.
+- Keep index.html pointed at src/main.tsx rather than checked-in bundles; otherwise source edits never reach the running app.

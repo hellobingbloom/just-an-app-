@@ -1,9 +1,9 @@
 # Roadmap
 
-- [ ] Match uploaded desktop watch-page layout for movies and TV/anime.
-- [ ] Switch app typography to sans-serif.
-- [ ] Add 300x250 units above natives in four desktop sponsored sections; preserve player leaderboard.
-- [ ] Verify desktop layout and existing phone layout.
+- [x] Match uploaded desktop watch-page layout for movies and TV/anime.
+- [x] Switch app typography to sans-serif.
+- [x] Add 300x250 units above natives in four desktop sponsored sections; preserve player leaderboard.
+- [x] Verify desktop and phone layout independently of third-party content; live creative delivery remains provider-dependent.
 
 - [x] Make phone fullscreen playback prefer landscape orientation.
 - [x] Replace the Explore bottom-navigation icon with a four-tile icon.
