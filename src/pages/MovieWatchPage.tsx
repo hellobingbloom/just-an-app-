@@ -5,6 +5,8 @@ import MoviePlayer, { ServerId } from "@/components/MoviePlayer";
 import SEO from "@/components/SEO";
 import InlineAdRow from "@/components/InlineAdRow";
 import Banner468Ad from "@/components/Banner468Ad";
+import DesktopWatchAds from "@/components/DesktopWatchAds";
+import WatchRecommendations from "@/components/WatchRecommendations";
 
 
 import TmdbRow from "@/components/TmdbRow";
@@ -46,26 +48,27 @@ const MovieWatchPage = () => {
   const year = (data?.release_date || "").slice(0, 4);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "#0A0A0A" }}>
+    <div className="min-h-screen flex flex-col bg-background">
       <SEO
         title={data ? `Watch ${data.title} – BingBloom` : "Watch Movie – BingBloom"}
         description={data?.overview?.slice(0, 160) || "Stream movies in HD on BingBloom."}
         type="video.movie"
       />
-      <div className="flex-1 max-w-[1180px] mx-auto w-full">
-        <header className="sticky top-0 z-30 flex items-center gap-3 px-3 h-11 bg-[#0A0A0A]/95 backdrop-blur border-b border-white/5">
-          <Link to={tmdbId ? `/movie/${tmdbId}` : "/home"} className="p-1.5 -ml-1 rounded-full hover:bg-white/10">
-            <ArrowLeft className="w-4 h-4 text-white" />
+      <div className="flex-1 max-w-[1480px] mx-auto w-full">
+        <header className="sticky top-0 z-30 flex items-center gap-3 px-4 h-12 bg-background/95 backdrop-blur border-b border-border">
+          <Link to={tmdbId ? `/movie/${tmdbId}` : "/home"} className="p-1.5 -ml-1 rounded-full hover:bg-muted">
+            <ArrowLeft className="w-4 h-4 text-foreground" />
           </Link>
-          <h1 className="text-[13px] font-semibold text-white truncate">{data?.title || "Watch"}</h1>
+          <h1 className="text-[13px] font-semibold text-foreground truncate">{data?.title || "Watch"}</h1>
         </header>
 
-        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-6 lg:px-4 lg:pt-3">
+        <div className="md:grid md:grid-cols-[150px_minmax(0,1fr)_220px] xl:grid-cols-[190px_minmax(0,1fr)_300px] md:gap-4 xl:gap-6 md:px-4 md:pt-5">
+          <DesktopWatchAds />
           <div className="min-w-0">
             <div className="px-3 pt-2 pb-1.5">
               <Banner468Ad label={false} />
             </div>
-            <div className="w-full md:max-w-2xl md:mx-auto lg:max-w-[820px] lg:mx-0">
+            <div className="w-full">
               <MoviePlayer
                 tmdbId={tmdbId || ""}
                 type="movie"
@@ -82,29 +85,29 @@ const MovieWatchPage = () => {
 
 
             {data && (
-              <div className="px-4 pb-4 lg:px-0">
+              <div className="px-4 pb-4 md:px-0">
                 <div className="pt-3">
-                  <h2 className="text-base font-bold text-white tracking-tight">{data.title}</h2>
-                  <p className="text-[10.5px] text-white/55 mt-0.5">
+                  <h2 className="text-base font-bold text-foreground tracking-normal">{data.title}</h2>
+                  <p className="text-[10.5px] text-muted-foreground mt-0.5">
                     {year}{data.runtime ? ` · ${data.runtime} min` : ""}
                   </p>
                 </div>
 
                 {/* Mobile/tablet: horizontal suggestions. Desktop shows list in sidebar. */}
-                <section className="mt-4 lg:hidden">
-                  <h3 className="text-[12px] font-semibold text-white mb-2">You May Also Like</h3>
+                <section className="mt-4 md:hidden">
+                  <h3 className="text-[12px] font-semibold text-foreground mb-2">You May Also Like</h3>
                   <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 -mx-4 px-4">
                     {suggestions.slice(0, 20).map((m: any) => (
                       <Link
                         key={m.id}
                         to={`/watch/movie/${m.id}`}
-                        className="relative flex-shrink-0 w-[110px] aspect-video rounded-lg overflow-hidden bg-white/5 border border-white/10"
+                        className="relative flex-shrink-0 w-[110px] aspect-video rounded-lg overflow-hidden bg-muted border border-border"
                       >
                         {(m.backdrop_path || m.poster_path) && (
                           <img src={img(m.backdrop_path || m.poster_path, "w300")} alt={m.title} loading="lazy" className="w-full h-full object-cover" />
                         )}
-                        <span className="absolute bottom-1 right-1 grid place-items-center w-5 h-5 rounded-full bg-[#E50914]">
-                          <Play className="w-2.5 h-2.5 text-white fill-white" />
+                        <span className="absolute bottom-1 right-1 grid place-items-center w-5 h-5 rounded-full bg-primary">
+                          <Play className="w-2.5 h-2.5 text-foreground fill-primary-foreground" />
                         </span>
                       </Link>
                     ))}
@@ -113,18 +116,18 @@ const MovieWatchPage = () => {
 
                 {data.overview && (
                   <section className="mt-4">
-                    <h3 className="text-[12px] font-semibold text-white mb-1">Synopsis</h3>
-                    <p className="text-[11px] leading-relaxed text-white/65 line-clamp-3">{data.overview}</p>
+                    <h3 className="text-[12px] font-semibold text-foreground mb-1">Synopsis</h3>
+                    <p className="text-[11px] leading-relaxed text-muted-foreground line-clamp-3">{data.overview}</p>
                   </section>
                 )}
 
                 {cast.length > 0 && (
                   <div className="mt-4">
-                    <h3 className="text-[12px] font-semibold text-white mb-1.5">Cast</h3>
+                    <h3 className="text-[12px] font-semibold text-foreground mb-1.5">Cast</h3>
                     <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
                       {cast.map((c: any) => (
                         <div key={c.credit_id || c.id} className="flex-shrink-0 w-11 text-center">
-                          <div className="w-11 h-11 rounded-full overflow-hidden bg-white/5 mx-auto">
+                          <div className="w-11 h-11 rounded-full overflow-hidden bg-muted mx-auto">
                             <img src={img(c.profile_path, "w200") || "/placeholder.svg"} alt={c.name} loading="lazy" className="w-full h-full object-cover" />
                           </div>
                         </div>
@@ -133,58 +136,24 @@ const MovieWatchPage = () => {
                   </div>
                 )}
 
-                <div className="mt-3 -mx-4 lg:mx-0">
+                <div className="mt-3 -mx-4 md:mx-0">
                   <InlineAdRow count={4} />
                 </div>
 
-                <div className="mt-2 -mx-4 lg:mx-0 space-y-0.5">
+                <div className="mt-2 -mx-4 md:mx-0 space-y-0.5">
                   <TmdbRow title="Trending Now" items={trending.data} isLoading={trending.isLoading} type="movie" />
                   <TmdbRow title="Popular Movies" items={popular.data} isLoading={popular.isLoading} type="movie" />
                   <TmdbRow title="Top Rated" items={topRated.data} isLoading={topRated.isLoading} type="movie" ranked />
                 </div>
 
-                <div className="mt-2 -mx-4 lg:mx-0">
+                <div className="mt-2 -mx-4 md:mx-0">
                   <InlineAdRow count={4} />
                 </div>
               </div>
             )}
           </div>
 
-          {/* Desktop sidebar — YouTube-style suggestions column */}
-          <aside className="hidden lg:block w-[320px] shrink-0 pt-1">
-            <div className="sticky top-14 space-y-4">
-              <div>
-                <h3 className="text-[13px] font-semibold text-white mb-2">Up Next</h3>
-                <div className="space-y-2">
-                  {suggestions.slice(0, 12).map((m: any) => (
-                    <Link
-                      key={m.id}
-                      to={`/watch/movie/${m.id}`}
-                      className="flex gap-2 group"
-                    >
-                      <div className="relative w-[160px] aspect-video rounded-lg overflow-hidden bg-white/5 shrink-0 border border-white/5">
-                        {(m.backdrop_path || m.poster_path) && (
-                          <img src={img(m.backdrop_path || m.poster_path, "w300")} alt={m.title} loading="lazy" className="w-full h-full object-cover" />
-                        )}
-                        <span className="absolute bottom-1 right-1 grid place-items-center w-5 h-5 rounded-full bg-[#E50914] opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Play className="w-2.5 h-2.5 text-white fill-white" />
-                        </span>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-[12px] font-semibold text-white leading-snug line-clamp-2 group-hover:text-[#E50914]">
-                          {m.title}
-                        </p>
-                        <p className="text-[10px] text-white/50 mt-1">
-                          {(m.release_date || "").slice(0, 4)}
-                          {m.vote_average ? ` · ★ ${m.vote_average.toFixed(1)}` : ""}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </aside>
+          <WatchRecommendations items={suggestions} type="movie" />
         </div>
       </div>
       <Footer />

@@ -12,41 +12,45 @@ const AD_KEY = "4fa6ae27677820639437c70201ff0a93";
 const AD_W = 468;
 const AD_H = 60;
 
-const SRC_DOC = `<!doctype html>
+const buildSrcDoc = (key: string, width: number, height: number) => `<!doctype html>
 <html><head><meta charset="utf-8"/>
 <style>html,body{margin:0;padding:0;background:transparent;overflow:hidden;}</style>
 </head><body>
 <script type="text/javascript">
   atOptions = {
-    'key' : '${AD_KEY}',
+    'key' : '${key}',
     'format' : 'iframe',
-    'height' : ${AD_H},
-    'width' : ${AD_W},
+    'height' : ${height},
+    'width' : ${width},
     'params' : {}
   };
 <\/script>
-<script src="https://bancadeltempoidea.org/22/${AD_KEY}"><\/script>
+<script src="https://bancadeltempoidea.org/22/${key}"><\/script>
 </body></html>`;
 
 interface Props {
   className?: string;
   /** Show the small "Advertisement" caption. */
   label?: boolean;
+  format?: "leaderboard" | "rectangle";
 }
 
-const Banner468Ad = ({ className = "", label = true }: Props) => {
+const Banner468Ad = ({ className = "", label = true, format = "leaderboard" }: Props) => {
+  const width = format === "rectangle" ? 300 : AD_W;
+  const height = format === "rectangle" ? 250 : AD_H;
+  const key = format === "rectangle" ? "7bdf2345688a935e14f4c7ff96269350" : AD_KEY;
   const wrapRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [armed, setArmed] = useState(false);
-  const srcDoc = useMemo(() => SRC_DOC, []);
+  const srcDoc = useMemo(() => buildSrcDoc(key, width, height), [key, width, height]);
 
   // Fit the fixed-size creative to the available width.
   useEffect(() => {
     const el = wrapRef.current;
     if (!el) return;
     const measure = () => {
-      const w = el.clientWidth || AD_W;
-      setScale(Math.min(1, w / AD_W));
+      const w = el.clientWidth || width;
+      setScale(Math.min(1, w / width));
     };
     measure();
     if (typeof ResizeObserver === "undefined") {
@@ -56,7 +60,7 @@ const Banner468Ad = ({ className = "", label = true }: Props) => {
     const ro = new ResizeObserver(measure);
     ro.observe(el);
     return () => ro.disconnect();
-  }, []);
+  }, [width]);
 
   // Mount only when close to the viewport so it counts a real impression.
   useEffect(() => {
@@ -91,15 +95,15 @@ const Banner468Ad = ({ className = "", label = true }: Props) => {
           Advertisement
         </span>
       )}
-      <div className="mx-auto" style={{ width: AD_W * scale, height: AD_H * scale }}>
+      <div className="mx-auto" style={{ width: width * scale, height: height * scale }}>
         {armed && (
           <iframe
             title="Advertisement"
             srcDoc={srcDoc}
             scrolling="no"
             loading="lazy"
-            width={AD_W}
-            height={AD_H}
+            width={width}
+            height={height}
             className="block border-0"
             style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
           />
