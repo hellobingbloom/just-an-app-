@@ -11,3 +11,5 @@
 
 - Keep all native placements routed through `NativeAd` and all display banners routed through `Banner468Ad`, so provider code changes remain consistent across the app.
 - Derive every BingBloom browser, PWA, Android, and iOS icon from the same official square artwork so brand marks never drift between platforms.
+- Use shared desktop watch-ad and recommendation components on movie and TV watch pages; this keeps their reference layout and ad ordering consistent.
+- Support leaderboard and rectangle formats through Banner468Ad; isolated frames prevent display-unit configuration collisions.
