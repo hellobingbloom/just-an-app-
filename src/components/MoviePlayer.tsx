@@ -325,7 +325,7 @@ const MoviePlayer = ({
         </div>
       </div>
 
-      <div className="border-t border-border/60">
+      <div className="border-t border-border/60 md:hidden">
         <InlineAdRow count={4} />
       </div>
 
