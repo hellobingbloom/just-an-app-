@@ -248,7 +248,7 @@ const MoviePlayer = ({
   if (!online) {
     return (
       <div className="w-full bg-background">
-        <div className="relative w-full aspect-video overflow-hidden flex flex-col items-center justify-center gap-3 px-6 text-center">
+        <div className="relative w-1/2 mx-auto aspect-video overflow-hidden flex flex-col items-center justify-center gap-3 px-6 text-center">
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-foreground/5">
             <WifiOff className="h-6 w-6 text-foreground/70" />
           </div>
@@ -272,7 +272,7 @@ const MoviePlayer = ({
     <div className="w-full bg-background">
       <div
         ref={containerRef}
-        className="relative w-full aspect-video overflow-hidden bb-player-shell bg-black"
+        className="relative w-1/2 mx-auto aspect-video overflow-hidden bb-player-shell bg-background"
       >
         <iframe
           key={embedUrl}
