@@ -14,3 +14,4 @@
 - Use shared desktop watch-ad and recommendation components on movie and TV watch pages; this keeps their reference layout and ad ordering consistent.
 - Support leaderboard and rectangle formats through Banner468Ad; isolated frames prevent display-unit configuration collisions.
 - Keep index.html pointed at src/main.tsx rather than checked-in bundles; otherwise source edits never reach the running app.
+- Centralize optional player sandbox permissions in the redirect-protection policy so all movie and TV embeds use the same restrictions.

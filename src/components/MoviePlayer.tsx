@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { WifiOff, CloudDownload, Share2, Check, Plus, Download, ChevronDown, Maximize, Minimize } from "lucide-react";
+import { WifiOff, CloudDownload, Share2, Check, Plus, Download, ChevronDown, Maximize, Minimize, ShieldCheck, ShieldOff } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { playerSandbox, supportsRedirectProtection } from "@/lib/playerRedirectProtection";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
@@ -74,6 +76,8 @@ const MoviePlayer = ({
 
   const active = SERVERS.find((s) => s.id === server) || SERVERS[0];
   const embedUrl = active.url(type, tmdbId, season, episode);
+  const [redirectProtection, setRedirectProtection] = useState(false);
+  const sandbox = playerSandbox(server, redirectProtection);
 
   const pickServer = (id: ServerKey) => {
     setServer(id);
@@ -208,13 +212,14 @@ const MoviePlayer = ({
     <div className="w-full bg-background">
       <div
         ref={containerRef}
-        className="relative w-full aspect-video overflow-hidden bb-player-shell bg-black"
+        className="relative w-full aspect-video overflow-hidden bb-player-shell bg-background"
       >
         <iframe
-          key={embedUrl}
+          key={`${embedUrl}:${sandbox || "unrestricted"}`}
           src={embedUrl}
+          sandbox={sandbox}
           title={title ? `Watch ${title}` : "BingBloom player"}
-          className="absolute inset-0 w-full h-full border-0 bg-black"
+          className="absolute inset-0 w-full h-full border-0 bg-background"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           allowFullScreen
           referrerPolicy="origin"
@@ -222,7 +227,7 @@ const MoviePlayer = ({
       </div>
 
       {/* Toolbar: server switcher + quick actions */}
-      <div className="flex items-center gap-2 px-3 py-1.5 bg-background border-t border-border/60 flex-wrap">
+      <div className="flex items-center gap-2 px-3 py-3 bg-background border-t border-border/60 flex-wrap">
         <div className="relative">
           <label className="sr-only" htmlFor="bb-server-select">
             Server
@@ -242,8 +247,23 @@ const MoviePlayer = ({
           <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-foreground/70" />
         </div>
 
-        <div className="ml-auto flex items-center gap-1.5">
-          <PlayerIconButton label="Download" onClick={() => setDownloadOpen(true)}>
+        {supportsRedirectProtection(server) && (
+          <Button
+            variant={redirectProtection ? "secondary" : "outline"}
+            size="sm"
+            aria-label="Redirect protection"
+            aria-pressed={redirectProtection}
+            title="Block player popups and redirects. Changing this reloads the player and may affect playback."
+            onClick={() => setRedirectProtection((enabled) => !enabled)}
+            className={redirectProtection ? "h-9 border border-primary/40 bg-primary/10 text-primary hover:bg-primary/20 text-xs" : "h-9 border-border/60 text-muted-foreground hover:text-foreground text-xs"}
+          >
+            {redirectProtection ? <ShieldCheck /> : <ShieldOff />}
+            Protection {redirectProtection ? "on" : "off"}
+          </Button>
+        )}
+
+        <div className="ml-auto flex items-center gap-2 flex-wrap">
+          <PlayerIconButton label="Download" prominent onClick={() => setDownloadOpen(true)}>
             <Download className="h-4 w-4" />
           </PlayerIconButton>
           <PlayerIconButton label={isFullscreen ? "Exit full screen" : "Full screen"} onClick={toggleFullscreen}>
@@ -254,6 +274,7 @@ const MoviePlayer = ({
           </PlayerIconButton>
           <PlayerIconButton
             label={inList ? "Remove from watchlist" : "Add to watchlist"}
+            selected={inList}
             onClick={toggleWatchlist}
           >
             {inList ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
@@ -284,23 +305,31 @@ const MoviePlayer = ({
 
 export default MoviePlayer;
 
-/** Circular, glassy icon button used in the player toolbar. */
+/** Compact squared controls with visible desktop labels and mobile tooltips. */
 const PlayerIconButton = ({
   label,
   onClick,
   children,
+  prominent = false,
+  selected = false,
 }: {
   label: string;
   onClick: () => void;
   children: React.ReactNode;
+  prominent?: boolean;
+  selected?: boolean;
 }) => (
-  <button
+  <Button
     type="button"
+    variant={prominent ? "default" : "outline"}
+    size="sm"
     title={label}
     aria-label={label}
     onClick={onClick}
-    className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full border border-border/60 text-foreground transition hover:bg-foreground/10 active:scale-95"
+    aria-pressed={label.includes("watchlist") ? selected : undefined}
+    className={`h-9 min-w-9 px-2.5 rounded-md transition active:scale-95 ${selected ? "border-primary/40 bg-primary/10 text-primary hover:bg-primary/20" : prominent ? "" : "border-border/60 bg-secondary/40 text-foreground hover:bg-secondary"}`}
   >
     {children}
-  </button>
+    {label !== "Share" && <span className="hidden lg:inline text-xs">{label.includes("watchlist") ? selected ? "Saved" : "Watchlist" : label}</span>}
+  </Button>
 );
