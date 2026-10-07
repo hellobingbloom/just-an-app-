@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Restyle download, fullscreen, and watchlist player controls.
-- [ ] Add optional redirect protection for CineSrc, Nova, and Vale and verify permissions and controls.
+- [x] Restyle download, fullscreen, and watchlist player controls.
+- [x] Add optional redirect protection for CineSrc, Nova, and Vale and verify permissions and controls.
 
 - [x] Match uploaded desktop watch-page layout for movies and TV/anime.
 - [x] Switch app typography to sans-serif.
