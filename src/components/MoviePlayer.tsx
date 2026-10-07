@@ -22,13 +22,13 @@ interface Server {
 
 const SERVERS: Server[] = [
   { id: "cinesrc", label: "CineSrc", url: (type, id, s, e) => type === "tv" ? `https://cinesrc.st/embed/tv/${id}/${s}/${e}` : `https://cinesrc.st/embed/movie/${id}` },
-  { id: "vidbolt", label: "VidBolt", url: (type, id, s, e) => type === "tv" ? `https://vidbolt.xyz/tv/${id}/${s}/${e}?theme=9b5cff` : `https://vidbolt.xyz/movie/${id}?theme=9b5cff` },
   { id: "nova", label: "Nova", url: (type, id, s, e) => type === "tv" ? `https://moviesapi.to/tv/${id}/${s}/${e}` : `https://moviesapi.to/movie/${id}` },
+  { id: "vale", label: "Vale", url: (type, id, s, e) => type === "tv" ? `https://vidzen.fun/tv/${id}/${s}/${e}` : `https://vidzen.fun/movie/${id}` },
+  { id: "vidbolt", label: "VidBolt", url: (type, id, s, e) => type === "tv" ? `https://vidbolt.xyz/tv/${id}/${s}/${e}?theme=9b5cff` : `https://vidbolt.xyz/movie/${id}?theme=9b5cff` },
   { id: "crimson", label: "Crimson", url: (type, id, s, e) => type === "tv" ? `https://vidcore.io/tv/${id}/${s}/${e}` : `https://vidcore.io/movie/${id}` },
   { id: "helix", label: "Helix", url: (type, id, s, e) => type === "tv" ? `https://vidnest.fun/tv/${id}/${s}/${e}` : `https://vidnest.fun/movie/${id}` },
   { id: "astra", label: "Astra", url: (type, id, s, e) => type === "tv" ? `https://vidlink.pro/tv/${id}/${s}/${e}` : `https://vidlink.pro/movie/${id}` },
   { id: "ironclad", label: "Ironclad", url: (type, id, s, e) => type === "tv" ? `https://vidsrcme.ru/embed/tv/${id}/${s}/${e}` : `https://vidsrcme.ru/embed/movie/${id}` },
-  { id: "vale", label: "Vale", url: (type, id, s, e) => type === "tv" ? `https://vidzen.fun/tv/${id}/${s}/${e}` : `https://vidzen.fun/movie/${id}` },
   { id: "lumen", label: "Lumen", url: (type, id, s, e) => type === "tv" ? `https://embed.filmu.in/tv/${id}/${s}/${e}` : `https://embed.filmu.in/movie/${id}` },
 ];
 
