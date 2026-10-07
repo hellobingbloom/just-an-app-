@@ -8,17 +8,9 @@ import DownloadSourceSheet from "@/components/DownloadSourceSheet";
 import InlineAdRow from "@/components/InlineAdRow";
 import { trackMediaView } from "@/lib/analytics";
 
-const SERVER_PREF_KEY = "bb:player:server";
+const SERVER_PREF_KEY = "bb:player:server:v2";
 
-type ServerKey =
-  | "vidbolt"
-  | "nova"
-  | "crimson"
-  | "helix"
-  | "astra"
-  | "ironclad"
-  | "vale"
-  | "lumen";
+type ServerKey = "cinesrc" | "vidbolt" | "nova" | "crimson" | "helix" | "astra" | "ironclad" | "vale" | "lumen";
 
 interface Server {
   id: ServerKey;
@@ -27,72 +19,16 @@ interface Server {
 }
 
 const SERVERS: Server[] = [
-  {
-    id: "vidbolt",
-    label: "VidBolt",
-    url: (type, id, s, e) =>
-      type === "tv"
-        ? `https://vidbolt.xyz/tv/${id}/${s}/${e}?theme=9b5cff`
-        : `https://vidbolt.xyz/movie/${id}?theme=9b5cff`,
-  },
-  {
-    id: "nova",
-    label: "Nova",
-    url: (type, id, s, e) =>
-      type === "tv"
-        ? `https://cinesrc.st/tv/${id}/${s}/${e}`
-        : `https://cinesrc.st/movie/${id}`,
-  },
-  {
-    id: "crimson",
-    label: "Crimson",
-    url: (type, id, s, e) =>
-      type === "tv"
-        ? `https://vidcore.io/tv/${id}/${s}/${e}`
-        : `https://vidcore.io/movie/${id}`,
-  },
-  {
-    id: "helix",
-    label: "Helix",
-    url: (type, id, s, e) =>
-      type === "tv"
-        ? `https://vidnest.fun/tv/${id}/${s}/${e}`
-        : `https://vidnest.fun/movie/${id}`,
-  },
-  {
-    id: "astra",
-    label: "Astra",
-    url: (type, id, s, e) =>
-      type === "tv"
-        ? `https://vidlink.pro/tv/${id}/${s}/${e}`
-        : `https://vidlink.pro/movie/${id}`,
-  },
-  {
-    id: "ironclad",
-    label: "Ironclad",
-    url: (type, id, s, e) =>
-      type === "tv"
-        ? `https://vidsrcme.ru/tv/${id}/${s}/${e}`
-        : `https://vidsrcme.ru/movie/${id}`,
-  },
-  {
-    id: "vale",
-    label: "Vale",
-    url: (type, id, s, e) =>
-      type === "tv"
-        ? `https://vidgod.site/tv/${id}/${s}/${e}`
-        : `https://vidgod.site/movie/${id}`,
-  },
-  {
-    id: "lumen",
-    label: "Lumen",
-    url: (type, id, s, e) =>
-      type === "tv"
-        ? `https://embed.filmu.in/tv/${id}/${s}/${e}`
-        : `https://embed.filmu.in/movie/${id}`,
-  },
+  { id: "cinesrc", label: "CineSrc", url: (type, id, s, e) => type === "tv" ? `https://cinesrc.st/embed/tv/${id}/${s}/${e}` : `https://cinesrc.st/embed/movie/${id}` },
+  { id: "vidbolt", label: "VidBolt", url: (type, id, s, e) => type === "tv" ? `https://vidbolt.xyz/tv/${id}/${s}/${e}?theme=9b5cff` : `https://vidbolt.xyz/movie/${id}?theme=9b5cff` },
+  { id: "nova", label: "Nova", url: (type, id, s, e) => type === "tv" ? `https://moviesapi.to/tv/${id}/${s}/${e}` : `https://moviesapi.to/movie/${id}` },
+  { id: "crimson", label: "Crimson", url: (type, id, s, e) => type === "tv" ? `https://vidcore.io/tv/${id}/${s}/${e}` : `https://vidcore.io/movie/${id}` },
+  { id: "helix", label: "Helix", url: (type, id, s, e) => type === "tv" ? `https://vidnest.fun/tv/${id}/${s}/${e}` : `https://vidnest.fun/movie/${id}` },
+  { id: "astra", label: "Astra", url: (type, id, s, e) => type === "tv" ? `https://vidlink.pro/tv/${id}/${s}/${e}` : `https://vidlink.pro/movie/${id}` },
+  { id: "ironclad", label: "Ironclad", url: (type, id, s, e) => type === "tv" ? `https://vidsrcme.ru/embed/tv/${id}/${s}/${e}` : `https://vidsrcme.ru/embed/movie/${id}` },
+  { id: "vale", label: "Vale", url: (type, id, s, e) => type === "tv" ? `https://vidzen.fun/tv/${id}/${s}/${e}` : `https://vidzen.fun/movie/${id}` },
+  { id: "lumen", label: "Lumen", url: (type, id, s, e) => type === "tv" ? `https://embed.filmu.in/tv/${id}/${s}/${e}` : `https://embed.filmu.in/movie/${id}` },
 ];
-
 
 // Kept as a legacy type so existing pages that pass `serverId`/`onServerChange`
 // still typecheck.
@@ -133,7 +69,7 @@ const MoviePlayer = ({
     } catch {
       /* ignore */
     }
-    return "vidbolt";
+    return "cinesrc";
   });
 
   const active = SERVERS.find((s) => s.id === server) || SERVERS[0];

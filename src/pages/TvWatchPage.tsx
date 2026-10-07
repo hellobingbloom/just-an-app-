@@ -63,7 +63,7 @@ const TvWatchPage = () => {
         <div className="md:grid md:grid-cols-[150px_minmax(0,1fr)_220px] xl:grid-cols-[190px_minmax(0,1fr)_300px] md:gap-4 xl:gap-6 md:px-4 md:pt-5">
           <DesktopWatchAds />
           <div className="min-w-0">
-            <div className="px-3 pt-2 pb-1.5">
+            <div className="px-3 pt-2 pb-1.5 md:hidden">
               <Banner468Ad label={false} />
             </div>
             <div className="w-full">
@@ -187,7 +187,7 @@ const TvWatchPage = () => {
             )}
           </div>
 
-          <WatchRecommendations items={popular.data || trending.data || []} type="tv" />
+          <div className="hidden md:block min-w-0 space-y-3"><Banner468Ad label={false} /><WatchRecommendations items={popular.data || trending.data || []} type="tv" /></div>
         </div>
       </div>
       <Footer />
