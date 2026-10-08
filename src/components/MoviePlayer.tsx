@@ -12,7 +12,7 @@ import { trackMediaView } from "@/lib/analytics";
 
 const SERVER_PREF_KEY = "bb:player:server:v2";
 
-type ServerKey = "cinesrc" | "vidbolt" | "nova" | "crimson" | "helix" | "astra" | "ironclad" | "vale" | "lumen";
+type ServerKey = "cinesrc" | "vidbolt" | "nova" | "crimson" | "helix" | "astra" | "ironclad" | "vale" | "smashystreams" | "dumbo" | "lumen";
 
 interface Server {
   id: ServerKey;
