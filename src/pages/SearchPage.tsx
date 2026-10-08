@@ -460,12 +460,12 @@ const SearchPage = () => {
                 <p className="text-[10px] text-white/50 mb-2">
                   {filtered.length} result{filtered.length === 1 ? "" : "s"} for "{searchQuery}"
                 </p>
-                <div className="space-y-2 pb-4">
+                <div className="grid grid-cols-4 gap-1.5 pb-4">
                   {filtered.map((item, i) => (
-                    <div key={`${item._type}-${item.id}`}>
-                      <ResultRow item={item} onClick={() => openItem(item)} />
-                      {(i + 1) % 6 === 0 && i < filtered.length - 1 && (
-                        <div className="-mx-5 my-2">
+                    <div key={`${item._type}-${item.id}`} className="contents">
+                      <ExploreCard item={item} onClick={() => openItem(item)} />
+                      {(i + 1) % 8 === 0 && i < filtered.length - 1 && (
+                        <div className="col-span-4 -mx-5 my-2">
                           <SponsoredLabel />
                           <InlineAdRow count={4} />
                         </div>

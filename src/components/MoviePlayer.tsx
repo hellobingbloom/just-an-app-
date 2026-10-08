@@ -229,8 +229,8 @@ const MoviePlayer = ({
       </div>
 
       {/* Toolbar: server switcher + quick actions */}
-      <div className="flex items-center gap-2 px-3 py-3 bg-background border-t border-border/60 flex-wrap">
-        <div className="relative">
+      <div className="flex items-center gap-1.5 px-2 py-3 bg-background border-t border-border/60 flex-nowrap overflow-x-auto scrollbar-hide">
+        <div className="relative shrink-0">
           <label className="sr-only" htmlFor="bb-server-select">
             Server
           </label>
@@ -255,7 +255,7 @@ const MoviePlayer = ({
             aria-pressed={redirectProtection}
             title="Blocks player popups and redirects. Changing this reloads the player."
             onClick={() => setRedirectProtection((enabled) => !enabled)}
-            className={`h-8 shrink-0 whitespace-nowrap rounded-full px-3 text-[11px] font-semibold transition ${
+            className={`h-8 shrink-0 whitespace-nowrap rounded-full px-2.5 text-[10.5px] font-semibold transition ${
               redirectProtection
                 ? "bg-primary text-primary-foreground ring-1 ring-primary"
                 : "bg-primary/15 text-primary ring-1 ring-primary/50 animate-pulse shadow-[0_0_14px_hsl(var(--primary)/0.7)]"
@@ -265,7 +265,7 @@ const MoviePlayer = ({
           </button>
         )}
 
-        <div className="ml-auto flex items-center gap-2 flex-wrap">
+        <div className="ml-auto flex items-center gap-1.5 flex-nowrap shrink-0">
           <PlayerIconButton label="Download" prominent onClick={() => setDownloadOpen(true)}>
             <Download className="h-4 w-4" />
           </PlayerIconButton>
