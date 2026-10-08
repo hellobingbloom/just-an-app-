@@ -246,7 +246,7 @@ const MoviePlayer = ({
               </option>
             ))}
           </select>
-          <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-foreground/70" />
+          <ChevronDown className="pointer-events-none absolute right-1.5 top-1/2 h-3 w-3 md:right-2 md:h-3.5 md:w-3.5 -translate-y-1/2 text-foreground/70" />
         </div>
 
         {supportsRedirectProtection(server) && (
