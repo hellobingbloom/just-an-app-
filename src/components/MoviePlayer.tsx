@@ -229,8 +229,8 @@ const MoviePlayer = ({
       </div>
 
       {/* Toolbar: server switcher + quick actions */}
-      <div className="flex items-center gap-2 px-3 py-3 bg-background border-t border-border/60 flex-wrap">
-        <div className="relative">
+      <div className="flex items-center gap-1.5 px-2 py-3 bg-background border-t border-border/60 flex-nowrap overflow-x-auto scrollbar-hide">
+        <div className="relative shrink-0">
           <label className="sr-only" htmlFor="bb-server-select">
             Server
           </label>
@@ -265,7 +265,7 @@ const MoviePlayer = ({
           </button>
         )}
 
-        <div className="ml-auto flex items-center gap-2 flex-wrap">
+        <div className="ml-auto flex items-center gap-1.5 flex-nowrap shrink-0">
           <PlayerIconButton label="Download" prominent onClick={() => setDownloadOpen(true)}>
             <Download className="h-4 w-4" />
           </PlayerIconButton>
