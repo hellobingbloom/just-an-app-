@@ -12,7 +12,7 @@ import { trackMediaView } from "@/lib/analytics";
 
 const SERVER_PREF_KEY = "bb:player:server:v2";
 
-type ServerKey = "cinesrc" | "vidbolt" | "nova" | "crimson" | "helix" | "astra" | "ironclad" | "vale" | "lumen";
+type ServerKey = "cinesrc" | "vidbolt" | "nova" | "crimson" | "helix" | "astra" | "ironclad" | "vale" | "smashystreams" | "dumbo" | "lumen";
 
 interface Server {
   id: ServerKey;
@@ -24,6 +24,8 @@ const SERVERS: Server[] = [
   { id: "cinesrc", label: "CineSrc", url: (type, id, s, e) => type === "tv" ? `https://cinesrc.st/embed/tv/${id}/${s}/${e}` : `https://cinesrc.st/embed/movie/${id}` },
   { id: "nova", label: "Nova", url: (type, id, s, e) => type === "tv" ? `https://moviesapi.to/tv/${id}/${s}/${e}` : `https://moviesapi.to/movie/${id}` },
   { id: "vale", label: "Vale", url: (type, id, s, e) => type === "tv" ? `https://vidzen.fun/tv/${id}/${s}/${e}` : `https://vidzen.fun/movie/${id}` },
+  { id: "smashystreams", label: "SmashyStreams", url: (type, id, s, e) => type === "tv" ? `https://embed.smashystream.com/playere.php?tmdb=${id}&season=${s}&episode=${e}` : `https://embed.smashystream.com/playere.php?tmdb=${id}` },
+  { id: "dumbo", label: "Dumbo", url: (type, id, s, e) => type === "tv" ? `https://dulo.mov/watch/tv/${id}/${s}/${e}` : `https://dulo.mov/watch/movie/${id}` },
   { id: "vidbolt", label: "VidBolt", url: (type, id, s, e) => type === "tv" ? `https://vidbolt.xyz/tv/${id}/${s}/${e}?theme=9b5cff` : `https://vidbolt.xyz/movie/${id}?theme=9b5cff` },
   { id: "crimson", label: "Crimson", url: (type, id, s, e) => type === "tv" ? `https://vidcore.io/tv/${id}/${s}/${e}` : `https://vidcore.io/movie/${id}` },
   { id: "helix", label: "Helix", url: (type, id, s, e) => type === "tv" ? `https://vidnest.fun/tv/${id}/${s}/${e}` : `https://vidnest.fun/movie/${id}` },
@@ -240,7 +242,7 @@ const MoviePlayer = ({
           >
             {SERVERS.map((s) => (
               <option key={s.id} value={s.id} className="bg-background text-foreground">
-                {s.label}
+                {s.label}{supportsRedirectProtection(s.id) ? " (Protected)" : ""}
               </option>
             ))}
           </select>
@@ -248,18 +250,19 @@ const MoviePlayer = ({
         </div>
 
         {supportsRedirectProtection(server) && (
-          <Button
-            variant={redirectProtection ? "secondary" : "outline"}
-            size="sm"
-            aria-label="Redirect protection"
+          <button
+            type="button"
             aria-pressed={redirectProtection}
-            title="Block player popups and redirects. Changing this reloads the player and may affect playback."
+            title="Blocks player popups and redirects. Changing this reloads the player."
             onClick={() => setRedirectProtection((enabled) => !enabled)}
-            className={redirectProtection ? "h-9 border border-primary/40 bg-primary/10 text-primary hover:bg-primary/20 text-xs" : "h-9 border-border/60 text-muted-foreground hover:text-foreground text-xs"}
+            className={`h-8 shrink-0 whitespace-nowrap rounded-full px-3 text-[11px] font-semibold transition ${
+              redirectProtection
+                ? "bg-primary text-primary-foreground ring-1 ring-primary"
+                : "bg-primary/15 text-primary ring-1 ring-primary/50 animate-pulse shadow-[0_0_14px_hsl(var(--primary)/0.7)]"
+            }`}
           >
-            {redirectProtection ? <ShieldCheck /> : <ShieldOff />}
-            Protection {redirectProtection ? "on" : "off"}
-          </Button>
+            {redirectProtection ? "Ads off ✓" : "Turn off ads"}
+          </button>
         )}
 
         <div className="ml-auto flex items-center gap-2 flex-wrap">
@@ -281,6 +284,12 @@ const MoviePlayer = ({
           </PlayerIconButton>
         </div>
       </div>
+
+      {supportsRedirectProtection(server) && (
+        <p className="px-3 pb-2 bg-background text-[10.5px] leading-snug text-muted-foreground">
+          For no redirects, turn on "Turn off ads". If the video doesn't play, or you see a message about sandboxing, turn it off again so it works and you keep enjoying your show.
+        </p>
+      )}
 
       <div className="border-t border-border/60 md:hidden">
         <InlineAdRow count={4} />

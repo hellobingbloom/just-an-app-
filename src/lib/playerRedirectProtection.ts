@@ -1,4 +1,4 @@
-const PROTECTED_SERVERS = new Set(["cinesrc", "nova", "vale"]);
+const PROTECTED_SERVERS = new Set(["cinesrc", "nova", "vale", "smashystreams", "dumbo"]);
 
 export const supportsRedirectProtection = (server: string) => PROTECTED_SERVERS.has(server);
 
