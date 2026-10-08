@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { playerSandbox, supportsRedirectProtection } from "../lib/playerRedirectProtection";
 
 describe("player redirect protection", () => {
-  for (const server of ["cinesrc", "nova", "vale"]) {
+  for (const server of ["cinesrc", "nova", "vale", "smashystreams", "dumbo"]) {
     it(`restricts redirects on ${server} only when enabled`, () => {
       expect(supportsRedirectProtection(server)).toBe(true);
       expect(playerSandbox(server, false)).toBeUndefined();
