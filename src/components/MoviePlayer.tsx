@@ -238,15 +238,15 @@ const MoviePlayer = ({
             id="bb-server-select"
             value={server}
             onChange={(e) => pickServer(e.target.value as ServerKey)}
-            className="h-9 appearance-none rounded-md border border-border/60 bg-foreground/5 pl-3 pr-8 text-[12px] font-semibold text-foreground"
+            className="h-8 w-[84px] md:w-auto appearance-none truncate rounded-md border border-border/60 bg-foreground/5 pl-2 pr-6 text-[11px] md:h-9 md:pl-3 md:pr-8 md:text-[12px] font-semibold text-foreground"
           >
             {SERVERS.map((s) => (
               <option key={s.id} value={s.id} className="bg-background text-foreground">
-                {s.label}{supportsRedirectProtection(s.id) ? " (Protected)" : ""}
+                {s.label}{supportsRedirectProtection(s.id) ? " 🛡" : ""}
               </option>
             ))}
           </select>
-          <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-foreground/70" />
+          <ChevronDown className="pointer-events-none absolute right-1.5 top-1/2 h-3 w-3 md:right-2 md:h-3.5 md:w-3.5 -translate-y-1/2 text-foreground/70" />
         </div>
 
         {supportsRedirectProtection(server) && (
