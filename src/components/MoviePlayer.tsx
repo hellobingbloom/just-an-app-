@@ -255,7 +255,7 @@ const MoviePlayer = ({
             aria-pressed={redirectProtection}
             title="Blocks player popups and redirects. Changing this reloads the player."
             onClick={() => setRedirectProtection((enabled) => !enabled)}
-            className={`h-8 shrink-0 whitespace-nowrap rounded-full px-3 text-[11px] font-semibold transition ${
+            className={`h-8 shrink-0 whitespace-nowrap rounded-full px-2.5 text-[10.5px] font-semibold transition ${
               redirectProtection
                 ? "bg-primary text-primary-foreground ring-1 ring-primary"
                 : "bg-primary/15 text-primary ring-1 ring-primary/50 animate-pulse shadow-[0_0_14px_hsl(var(--primary)/0.7)]"
