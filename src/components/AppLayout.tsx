@@ -20,7 +20,7 @@ const NO_END_AD = [
   "/help", "/jobs", "/terms", "/contact", "/only-on-bingbloom",
   "/redeem", "/privacy", "/speed-test", "/ad-choices", "/media",
   "/gift-cards", "/cookie-preferences", "/legal-guarantee", "/follow-us",
-  "/install", "/search",
+  "/install", "/search", "/download-app",
 ];
 
 const AppLayout = ({ children, hideNav, hideFooter }: AppLayoutProps) => {
