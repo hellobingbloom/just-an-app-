@@ -42,6 +42,7 @@ import DocumentaryPage from "./pages/DocumentaryPage";
 
 import MyDownloadsPage from "./pages/MyDownloadsPage";
 import DownloadPage from "./pages/DownloadPage";
+import DownloadOptionsPage from "./pages/DownloadOptionsPage";
 import InstallAppPage from "./pages/InstallAppPage";
 import DownloadApkPage from "./pages/DownloadApkPage";
 import Contact from "./pages/Contact";
@@ -186,6 +187,7 @@ const App = () => {
           <Route path="/downloads" element={<Navigate to="/my-downloads" replace />} />
           <Route path="/download/:mediaType/:id" element={<DownloadPage />} />
           <Route path="/download/:mediaType/:id/:s/:e" element={<DownloadPage />} />
+          <Route path="/download-app" element={<DownloadOptionsPage />} />
           <Route path="/install" element={<InstallAppPage />} />
           <Route path="/download-apk" element={<DownloadApkPage />} />
           <Route path="/contact" element={<Contact />} />

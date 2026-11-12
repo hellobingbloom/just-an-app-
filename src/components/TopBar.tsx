@@ -118,15 +118,13 @@ const TopBar = () => {
 
           {/* Right cluster — mobile: install, search, profile, settings (rightmost) */}
           <div className="flex items-center gap-1 flex-shrink-0">
-            <a
-              href="https://bingbloomdownload.lovable.app"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/download-app"
               className="md:hidden inline-flex items-center gap-1 rounded-sm bg-primary px-2 py-1 text-[10px] font-bold uppercase text-primary-foreground"
               aria-label="Download BingBloom app"
             >
               <Download className="h-3 w-3" /> Download App
-            </a>
+            </Link>
             <a
               href="https://whatsapp.com/channel/0029VbD2CdHEwEjtJ5Utbo2n"
               target="_blank"
@@ -136,15 +134,13 @@ const TopBar = () => {
             >
               <WhatsAppIcon className="h-3.5 w-3.5" />
             </a>
-            <a
-              href="https://bingbloomdownload.lovable.app"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/download-app"
               className="hidden md:inline-flex items-center gap-1.5 rounded-sm border border-border bg-secondary px-3 py-2 text-[12px] font-semibold text-foreground hover:border-primary"
               aria-label="Download BingBloom app on desktop"
             >
               <Download className="h-3.5 w-3.5" /> Download App
-            </a>
+            </Link>
             <a
               href="https://whatsapp.com/channel/0029VbD2CdHEwEjtJ5Utbo2n"
               target="_blank"
